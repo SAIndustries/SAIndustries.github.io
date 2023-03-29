@@ -1,0 +1,17 @@
+body {
+    background-image: url("Images/Logo.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#Tagline {
+    font-style: italic;
+    color: aliceblue;
+    text-align: center;
+}
+
+#SUC {
+    text-align: center;
+    color: darkgoldenrod;
+    text-align-last: center;
+}

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -109,7 +109,164 @@
         </div>
         <a class="online" href="#"><i class="fas fa-circle"></i> Available For Job</a>
     </footer>
-
 </body>
+</html> -->
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A cute Valentine's Day page to ask someone to be your Valentine!">
+  <meta name="theme-color" content="#ffd0e5">
+  <title>Valentine's Day</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <style>
+    .gradient-background {
+      background: linear-gradient(180deg, #ffd0e5 0%, #ffe8f2 36%, #ffffff 100%);
+      min-height: 100vh;
+    }
+
+    .bounce {
+      animation: bounce 2s ease infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-20px);
+      }
+      60% {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
+  <link rel="preload" as="image" href="./images/image1.gif">
+  <link rel="preload" as="image" href="./images/image2.gif">
+  <link rel="preload" as="image" href="./images/image3.gif">
+  <link rel="preload" as="image" href="./images/image4.gif">
+  <link rel="preload" as="image" href="./images/image5.gif">
+  <link rel="preload" as="image" href="./images/image6.gif">
+  <link rel="preload" as="image" href="./images/image7.gif">
+</head>
+<body class="gradient-background">
+  <main class="flex items-center justify-center h-screen">
+    <section class="flex flex-col items-center p-4">
+      <img
+        id="imageDisplay"
+        src="./images/image1.gif"
+        alt="Cute kitten with flowers"
+        class="rounded-md h-[300px] object-cover"
+      />
+      <h1 id="valentineQuestion" class="text-4xl font-bold italic text-[#bd1e59] my-4">
+        Will you be my Valentine?
+      </h1>
+      <div id="responseButtons" class="flex gap-4 pt-5 items-center">
+        <button
+          id="yesButton"
+          class="bounce inline-flex items-center justify-center whitespace-nowrap rounded-md text-xl font-medium cursor-pointer px-4 py-2 bg-green-500 text-white transition-all duration-300 ease-in-out hover:bg-green-400 min-h-12 min-w-[75px]"
+        >
+          Yes
+        </button>
+        <button
+          id="noButton"
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-xl font-medium cursor-pointer px-4 py-2 bg-red-500 text-white transition-colors hover:bg-red-700 h-12 min-w-[75px]"
+        >
+          No
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const yesButton = document.getElementById('yesButton');
+      const noButton = document.getElementById('noButton');
+      const imageDisplay = document.getElementById('imageDisplay');
+      const valentineQuestion = document.getElementById('valentineQuestion');
+      const responseButtons = document.getElementById('responseButtons');
+
+      const GROWTH_PER_CLICK = 35;
+      const FONT_GROWTH_PER_CLICK = 25;
+      const MAX_NO_CLICKS = 5;
+
+      const IMAGE_PATHS = [
+        './images/image1.gif',
+        './images/image2.gif',
+        './images/image3.gif',
+        './images/image4.gif',
+        './images/image5.gif',
+        './images/image6.gif',
+        './images/image7.gif',
+      ];
+
+      const NO_BUTTON_MESSAGES = [
+        'No',
+        'Are you sure?',
+        'Pookie please',
+        "Don't do this to me :(",
+        "You're breaking my heart",
+        "I'm gonna cry...",
+      ];
+
+      const ALT_TEXTS = [
+        'Cute kitten with flowers',
+        'Sad kitten looking up',
+        'Kitten begging',
+        'Heartbroken kitten',
+        'Crying kitten',
+        'Devastated kitten',
+        'Happy kitten celebrating',
+      ];
+
+      let noClickCount = 0;
+      let buttonHeight = 48;
+      let buttonWidth = 80;
+      let fontSize = 20;
+
+      noButton.addEventListener('click', () => {
+        if (noClickCount >= MAX_NO_CLICKS) return;
+
+        noClickCount++;
+
+        imageDisplay.src = IMAGE_PATHS[noClickCount];
+        imageDisplay.alt = ALT_TEXTS[noClickCount];
+
+        buttonHeight += GROWTH_PER_CLICK;
+        buttonWidth += GROWTH_PER_CLICK;
+        fontSize += FONT_GROWTH_PER_CLICK;
+
+        yesButton.style.height = `${buttonHeight}px`;
+        yesButton.style.width = `${buttonWidth}px`;
+        yesButton.style.fontSize = `${fontSize}px`;
+
+        noButton.textContent = NO_BUTTON_MESSAGES[noClickCount];
+      });
+
+      yesButton.addEventListener('click', () => {
+        imageDisplay.src = IMAGE_PATHS[IMAGE_PATHS.length - 1];
+        imageDisplay.alt = ALT_TEXTS[ALT_TEXTS.length - 1];
+        valentineQuestion.textContent = 'Yayyy!! :3';
+        responseButtons.style.display = 'none';
+
+        const heart = confetti.shapeFromPath({
+          path: 'M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z',
+        });
+
+        const defaults = { spread: 360, ticks: 100, gravity: 0, decay: 0.94, startVelocity: 20, shapes: [heart], colors: ['#ff69b4', '#ff1493', '#ff6b81', '#e84393'] };
+
+        confetti({ ...defaults, particleCount: 50, scalar: 2 });
+        confetti({ ...defaults, particleCount: 25, scalar: 3 });
+        confetti({ ...defaults, particleCount: 10, scalar: 4 });
+      });
+    })();
+  </script>
+</body>
 </html>
+
+
+
+

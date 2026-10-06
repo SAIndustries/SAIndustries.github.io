@@ -1,28 +1,80 @@
 # Vishal Sujatha Achimuthu — Portfolio
 
-Static personal site (HTML + CSS + JS, no build step) for GitHub Pages.
+<p align="center">
+  <strong>Data Science • Artificial Intelligence • Machine Learning • Quantitative Finance</strong>
+</p>
 
+<p align="center">
+  <a href="https://saindustries.github.io">🌐 View Portfolio</a>
+</p>
+
+## About
+
+Welcome to my personal portfolio.
+
+I am an **MSc Data Science student at King's College London** with industry experience and a strong interest in building practical, data-driven solutions. This portfolio brings together my academic work, technical projects, professional experience, and interests across **Data Science, AI, Machine Learning, and Quantitative Finance**.
+
+The site is designed to provide a concise overview of my work, skills, background, and the projects I am currently exploring.
+
+## What You'll Find
+
+- **About Me** — My background, interests, and current academic journey
+- **Skills** — Technical tools, technologies, and areas of expertise
+- **Experience** — Professional and project experience
+- **Projects** — Selected academic, personal, and technical projects
+- **CV** — My latest resume
+- **Contact & Links** — Ways to connect with me and explore my work
+
+## Tech Stack
+
+This portfolio is intentionally lightweight and built using:
+
+- **HTML5** — Structure and content
+- **CSS3** — Responsive design, layouts, animations, and themes
+- **JavaScript** — Interactivity, navigation, theme switching, and scroll effects
+- **GitHub Pages** — Hosting and deployment
+
+No frameworks or build tools are required.
+
+## Design & Features
+
+The portfolio includes:
+
+- Responsive design for desktop and mobile
+- Dark and light themes
+- Mobile-friendly navigation
+- Scroll-based animations
+- Project showcase
+- Downloadable CV
+- Social and professional links
+- GitHub Pages deployment
+
+## Repository Structure
+
+```text
+.
+├── index.html      # Main portfolio page
+├── styles.css      # Styling and responsive design
+├── script.js       # Interactive functionality
+├── assets/         # Images, CV, favicon, and other assets
+└── .nojekyll       # GitHub Pages configuration
 ```
-index.html      page content — edit text here
-styles.css      design; change colours in the :root tokens at the top
-script.js       theme toggle, mobile menu, scroll effects
-assets/         photo, CV PDF, favicon, social-share image
-.nojekyll       tells GitHub Pages to serve files as-is
-```
 
-## Publish on GitHub Pages
+## Live Website
 
-1. On GitHub, create a **public** repo named exactly `SAIndustries.github.io`.
-2. Upload everything in this folder (keep the `assets/` folder) to the repo root and commit.
-3. Repo → **Settings → Pages** → Source: *Deploy from a branch* → Branch: `main` / `(root)` → Save.
-4. After ~1 minute the site is live at **https://saindustries.github.io**.
+🌐 **[saindustries.github.io](https://saindustries.github.io)**
 
-Then add that URL to your LinkedIn "Website" field and the header of your CV.
+The portfolio is hosted using **GitHub Pages**.
 
-## Common edits
+## Connect With Me
 
-- **Swap the CV:** replace `assets/Vishal_Sujatha_Achimuthu_CV.pdf` with a new file of the same name.
-- **Add a project:** copy one `<article class="card reveal">…</article>` block in the Projects section.
-  Add a repo link by copying the `card__link` anchor from the featured card.
-- **Change accent colour:** edit `--accent` in `styles.css` (dark and light themes each have one).
-- **Preview locally:** `python3 -m http.server` in this folder, then open http://localhost:8000.
+If you'd like to discuss Data Science, AI/ML, Quantitative Finance, projects, research, or potential opportunities, feel free to connect.
+
+- **GitHub:** [SAIndustries](https://github.com/SAIndustries)
+- **Portfolio:** [saindustries.github.io](https://saindustries.github.io)
+
+---
+
+<p align="center">
+  <i>Building with data, learning continuously, and turning ideas into practical solutions.</i>
+</p>

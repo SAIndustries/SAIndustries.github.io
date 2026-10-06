@@ -1,3 +1,9 @@
+/* =========================================================
+   Portfolio interactions
+   GSAP + ScrollTrigger + Lenis (vendored in assets/js).
+   Everything degrades gracefully: without JS / libraries or with
+   "reduce motion" on, the page is a normal static, readable site.
+   ========================================================= */
 (() => {
   const root = document.documentElement;
   const $ = (s, c = document) => c.querySelector(s);

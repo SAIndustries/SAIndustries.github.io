@@ -99,9 +99,12 @@
       </div>
 
       <div class="hero__bar" data-hero-in>
-        <span>London · <span class="clock" data-clock>--:--</span></span>
+        <span class="hero__cities">
+          <span>London <b data-clock="Europe/London">--:--</b></span>
+          <span>Chennai <b data-clock="Asia/Kolkata">--:--</b></span>
+        </span>
         <span class="hero__scroll">scroll <i></i></span>
-        <span>51.50° N, 0.09° W</span>
+        <span class="hero__coords">51.50° N, 0.09° W <i>↔</i> 13.08° N, 80.27° E</span>
       </div>
     </section>
 
@@ -157,10 +160,38 @@
           </p>
           <ul class="facts">
             <li class="reveal"><span>Based in</span>London, UK</li>
+            <li class="reveal"><span>From</span>Chennai, India</li>
             <li class="reveal"><span>Studying</span>MSc Data Science, KCL (2026–27)</li>
             <li class="reveal"><span>Languages</span>English · Tamil · Hindi</li>
             <li class="reveal"><span>Open to</span>Quant, Data Science, Investment Banking, Venture Capital &amp; Consulting Roles</li>
           </ul>
+
+          <!-- Chennai → London route -->
+          <figure class="route reveal" aria-label="From Chennai to London, 8,208 kilometres">
+            <svg class="route__map" viewBox="0 0 400 150" aria-hidden="true">
+              <path class="route__arc" id="routeArc" d="M330 118 Q 215 -30 60 46" />
+              <path class="route__trail" d="M330 118 Q 215 -30 60 46" />
+              <circle class="route__pin" cx="330" cy="118" r="5" />
+              <circle class="route__pin" cx="60" cy="46" r="5" />
+              <circle class="route__pulse" cx="60" cy="46" r="5" />
+              <circle class="route__plane" r="4">
+                <animateMotion dur="5s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines=".45 0 .2 1"><mpath href="#routeArc"/></animateMotion>
+              </circle>
+            </svg>
+            <div class="route__ends">
+              <div>
+                <span class="route__city">London</span>
+                <span class="route__coord">51.51° N, 0.09° W</span>
+                <span class="route__time"><b data-clock="Europe/London">--:--</b> <span data-tzname>UK</span></span>
+              </div>
+              <div class="route__dist"><b>8,208</b> km</div>
+              <div class="route__end--right">
+                <span class="route__city">Chennai</span>
+                <span class="route__coord">13.08° N, 80.27° E</span>
+                <span class="route__time"><b data-clock="Asia/Kolkata">--:--</b> IST</span>
+              </div>
+            </div>
+          </figure>
         </div>
       </div>
     </section>
@@ -216,13 +247,37 @@
             <h2 class="split">Things I've <em>built.</em></h2>
           </div>
           <div class="projects__meta">
-            <span class="projects__counter"><b id="projNow">01</b> / 04</span>
+            <span class="projects__counter"><b id="projNow">01</b> / <span id="projTotal">06</span></span>
             <a class="link-arrow" href="https://github.com/SAIndustries" target="_blank" rel="noopener">All repositories →</a>
           </div>
         </header>
 
         <div class="projects__track" id="projTrack">
           <!-- 01 -->
+          <article class="pcard pcard--feature" data-cursor="view">
+            <div class="pcard__visual" aria-hidden="true">
+              <div class="viz viz--book">
+                <div class="book">
+                  <i class="ask" style="--w:38%;--d:.1s"></i><i class="ask" style="--w:62%;--d:.7s"></i><i class="ask" style="--w:30%;--d:1.3s"></i><i class="ask" style="--w:48%;--d:.4s"></i>
+                  <span class="book__mid">mid</span>
+                  <i class="bid" style="--w:55%;--d:.9s"></i><i class="bid" style="--w:34%;--d:.2s"></i><i class="bid" style="--w:70%;--d:1.1s"></i><i class="bid" style="--w:42%;--d:.5s"></i>
+                </div>
+                <div class="book__stat"><b>−1.2 bp</b><span>adverse selection</span></div>
+              </div>
+              <span class="pcard__num">01</span>
+            </div>
+            <div class="pcard__body">
+              <div class="pcard__top">
+                <span class="badge">Featured · Oct 2026</span>
+                <a class="card__link" href="https://github.com/SAIndustries/LOB-Market-Making" target="_blank" rel="noopener">View repo ↗</a>
+              </div>
+              <h3>LOB Market Making</h3>
+              <p>Can a passive market maker make money on Binance spot? An order-book recorder and event-driven backtester that models latency and queue position, tested on BTCUSDT and DOGEUSDT with a strict tune / test split. Order-book imbalance predicts the next move (69.5% out-of-sample accuracy, AUC 0.76), yet quoting at the touch loses ~1.2 bp — and a PnL decomposition shows adverse selection is almost the whole loss. Imbalance filters and Avellaneda–Stoikov quoting didn't fix it out of sample.</p>
+              <div class="tags"><span>Python</span><span>Order books</span><span>Avellaneda–Stoikov</span><span>Backtesting</span><span>pytest</span></div>
+            </div>
+          </article>
+
+          <!-- 02 -->
           <article class="pcard pcard--feature" data-cursor="view">
             <div class="pcard__visual" aria-hidden="true">
               <svg viewBox="0 0 400 200" class="viz viz--equity" preserveAspectRatio="none">
@@ -232,20 +287,39 @@
                 <path class="viz__line" d="M0 160 L20 150 L40 155 L60 138 L80 142 L100 120 L120 126 L140 110 L160 116 L180 96 L200 104 L220 84 L240 90 L260 72 L280 80 L300 60 L320 66 L340 48 L360 54 L380 36 L400 30"/>
                 <path class="viz__null" d="M0 160 L40 162 L80 158 L120 164 L160 159 L200 163 L240 160 L280 165 L320 161 L360 163 L400 160"/>
               </svg>
-              <span class="pcard__num">01</span>
+              <span class="pcard__num">02</span>
             </div>
             <div class="pcard__body">
               <div class="pcard__top">
-                <span class="badge">Featured · Aug 2026</span>
+                <span class="badge">Aug 2026 · Quant research</span>
                 <a class="card__link" href="https://github.com/SAIndustries/quant-signal-lab" target="_blank" rel="noopener">View repo ↗</a>
               </div>
               <h3>Quant-Signal-Lab</h3>
-              <p>A leakage-safe, walk-forward research framework testing next-day ETF return predictions (ridge, gradient boosting, MLP) with volatility-targeted, cost-aware backtests. Skill judged by out-of-sample R², rank IC and Sharpe with confidence intervals and multiple-testing-corrected p-values; validated by 21 unit tests and null / planted-signal controls.</p>
+              <p>A leakage-safe, walk-forward research framework testing next-day ETF return predictions (ridge, gradient boosting, MLP) with volatility-targeted, cost-aware backtests. Skill judged by out-of-sample R², rank IC and Sharpe with confidence intervals and multiple-testing-corrected p-values; validated by 21 unit tests and null / planted-signal controls. Honest result: no model beat a simple baseline after costs.</p>
               <div class="tags"><span>Python</span><span>scikit-learn</span><span>Backtesting</span><span>Statistics</span><span>pytest</span></div>
             </div>
           </article>
+          <!-- 03 -->
+          <article class="pcard" data-cursor="view">
+            <div class="pcard__visual" aria-hidden="true">
+              <svg viewBox="0 0 400 200" class="viz viz--ecg" preserveAspectRatio="none">
+                <g class="viz__grid"><path d="M0 50H400M0 100H400M0 150H400"/></g>
+                <path class="ecg" d="M0 110 H70 l10 -6 l10 6 h20 l8 22 l12 -92 l12 96 l10 -26 h26 l14 -14 l14 14 H260 l10 -6 l10 6 h20 l8 22 l12 -92 l12 96 l10 -26 h26 l14 -14 l14 14 H400"/>
+              </svg>
+              <span class="pcard__num">03</span>
+            </div>
+            <div class="pcard__body">
+              <div class="pcard__top">
+                <span class="badge">Apr 2026 · Reinforcement learning</span>
+                <a class="card__link" href="https://github.com/SAIndustries/SMI" target="_blank" rel="noopener">View repo ↗</a>
+              </div>
+              <h3>SMIWatchEnv</h3>
+              <p>An OpenEnv reinforcement-learning environment that trains LLM agents to spot silent heart attacks from synthetic smartwatch signals (PPG, HRV, SpO₂, ECG). Comorbidity-aware tasks, with a PyTorch 1-D CNN pre-screener; Dockerised.</p>
+              <div class="tags"><span>PyTorch</span><span>RL</span><span>LLM agents</span><span>Docker</span></div>
+            </div>
+          </article>
 
-          <!-- 02 -->
+          <!-- 04 -->
           <article class="pcard" data-cursor="view">
             <div class="pcard__visual" aria-hidden="true">
               <div class="viz viz--morse">
@@ -254,7 +328,7 @@
                 <i class="d"></i><i class="d"></i><i class="d"></i><b></b>
                 <i class="l"></i><i class="l"></i><i class="l"></i>
               </div>
-              <span class="pcard__num">02</span>
+              <span class="pcard__num">04</span>
             </div>
             <div class="pcard__body">
               <div class="pcard__top"><span class="badge">Jan 2024 · Deep Learning</span></div>
@@ -263,12 +337,37 @@
               <div class="tags"><span>LipNet</span><span>TensorFlow</span><span>Accessibility</span></div>
             </div>
           </article>
+          <!-- 05 -->
+          <article class="pcard" data-cursor="view">
+            <div class="pcard__visual" aria-hidden="true">
+              <svg viewBox="0 0 200 120" class="viz viz--bloom">
+                <path class="bloom__stem" d="M100 118 C100 95 94 80 100 58"/>
+                <path class="bloom__leaf" d="M99 92 C86 86 80 92 76 98 C86 100 94 98 99 92Z"/>
+                <g class="bloom__head">
+                  <ellipse cx="100" cy="40" rx="7" ry="16"/><ellipse cx="100" cy="40" rx="7" ry="16" transform="rotate(60 100 52)"/>
+                  <ellipse cx="100" cy="40" rx="7" ry="16" transform="rotate(120 100 52)"/><ellipse cx="100" cy="40" rx="7" ry="16" transform="rotate(180 100 52)"/>
+                  <ellipse cx="100" cy="40" rx="7" ry="16" transform="rotate(240 100 52)"/><ellipse cx="100" cy="40" rx="7" ry="16" transform="rotate(300 100 52)"/>
+                  <circle class="bloom__core" cx="100" cy="52" r="7"/>
+                </g>
+              </svg>
+              <span class="pcard__num">05</span>
+            </div>
+            <div class="pcard__body">
+              <div class="pcard__top">
+                <span class="badge">Jul 2026 · Front-end</span>
+                <a class="card__link" href="https://github.com/SAIndustries/Pomodoro-Timer" target="_blank" rel="noopener">View repo ↗</a>
+              </div>
+              <h3>Bloom — Pomodoro Timer</h3>
+              <p>A focus timer where a hand-drawn flower grows through six stages — seed to full bloom — exactly as each session ends. Five flower species, custom durations, auto long breaks and reduced-motion support, in one self-contained HTML file.</p>
+              <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>SVG animation</span></div>
+            </div>
+          </article>
 
-          <!-- 03 -->
+          <!-- 06 -->
           <article class="pcard" data-cursor="view">
             <div class="pcard__visual" aria-hidden="true">
               <div class="viz viz--cube"><div class="cube"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
-              <span class="pcard__num">03</span>
+              <span class="pcard__num">06</span>
             </div>
             <div class="pcard__body">
               <div class="pcard__top"><span class="badge">Feb 2023 · AR / VR</span></div>
@@ -277,25 +376,29 @@
               <div class="tags"><span>Unity</span><span>Blender</span><span>C#</span></div>
             </div>
           </article>
-
-          <!-- 04 -->
-          <article class="pcard" data-cursor="view">
-            <div class="pcard__visual" aria-hidden="true">
-              <svg viewBox="0 0 400 200" class="viz viz--lstm" preserveAspectRatio="none">
-                <path class="viz__line" d="M0 120 C40 80 60 140 100 110 S160 60 200 90 S260 150 300 100 S360 60 400 80"/>
-                <path class="viz__pred" d="M0 126 C40 90 60 134 100 116 S160 72 200 96 S260 140 300 106 S360 70 400 88"/>
-              </svg>
-              <span class="pcard__num">04</span>
-            </div>
-            <div class="pcard__body">
-              <div class="pcard__top"><span class="badge">Nov 2022 · Machine Learning</span></div>
-              <h3>Stock Market Prediction</h3>
-              <p>My first look at markets: an LSTM price-prediction model built from scratch in Python on yFinance data, with exploratory analysis and visualisation. It later inspired the far more rigorous Quant-Signal-Lab.</p>
-              <div class="tags"><span>LSTM</span><span>Keras</span><span>yFinance</span></div>
-            </div>
-          </article>
         </div>
         <div class="projects__bar container" aria-hidden="true"><span id="projBar"></span></div>
+      </div>
+    </section>
+
+    <!-- ============ ALL REPOS (live from GitHub, static fallback below) ============ -->
+    <section class="repos" id="repos">
+      <div class="container">
+        <header class="repos__head">
+          <div>
+            <p class="kicker reveal">Everything on GitHub</p>
+            <h3 class="repos__title reveal">Repository index</h3>
+          </div>
+          <p class="repos__live reveal"><span class="dot"></span> <span id="reposStatus">Synced from github.com/SAIndustries</span></p>
+        </header>
+        <ol class="repos__list" id="reposList">
+          <li class="repo reveal"><a href="https://github.com/SAIndustries/LOB-Market-Making" target="_blank" rel="noopener"><span class="repo__name">LOB Market Making <em class="repo__feat">featured</em></span><span class="repo__desc">Event-driven market-making backtester on real Binance order book data, modelling latency and queue position.</span><span class="repo__lang"><i style="--c:#DA5B0B"></i>Jupyter Notebook</span><span class="repo__when">Oct 2026</span><span class="repo__go">↗</span></a></li>
+          <li class="repo reveal"><a href="https://github.com/SAIndustries/quant-signal-lab" target="_blank" rel="noopener"><span class="repo__name">quant-signal-lab <em class="repo__feat">featured</em></span><span class="repo__desc">Leakage-safe walk-forward evaluation and cost-aware backtesting of return-prediction models on 10 ETFs.</span><span class="repo__lang"><i style="--c:#3572A5"></i>Python</span><span class="repo__when">Oct 2026</span><span class="repo__go">↗</span></a></li>
+          <li class="repo reveal"><a href="https://github.com/SAIndustries/Pomodoro-Timer" target="_blank" rel="noopener"><span class="repo__name">Bloom — Pomodoro Timer <em class="repo__feat">featured</em></span><span class="repo__desc">Interactive Pomodoro timer with a flower that grows through each focus session.</span><span class="repo__lang"><i style="--c:#e34c26"></i>HTML</span><span class="repo__when">Jul 2026</span><span class="repo__go">↗</span></a></li>
+          <li class="repo reveal"><a href="https://github.com/SAIndustries/SMI" target="_blank" rel="noopener"><span class="repo__name">SMIWatchEnv <em class="repo__feat">featured</em></span><span class="repo__desc">RL environment for silent myocardial infarction detection from wearable signals.</span><span class="repo__lang"><i style="--c:#3572A5"></i>Python</span><span class="repo__when">Apr 2026</span><span class="repo__go">↗</span></a></li>
+          <li class="repo reveal"><a href="https://github.com/SAIndustries/Stock-Market-Test" target="_blank" rel="noopener"><span class="repo__name">Stock Market Prediction (LSTM)</span><span class="repo__desc">LSTM price prediction on yFinance data — my first market project, later rebuilt rigorously as quant-signal-lab.</span><span class="repo__lang"><i style="--c:#DA5B0B"></i>Jupyter Notebook</span><span class="repo__when">Feb 2024</span><span class="repo__go">↗</span></a></li>
+          <li class="repo reveal"><a href="https://github.com/SAIndustries/Mini-SRP-Project" target="_blank" rel="noopener"><span class="repo__name">Sentiment Analysis on YouTube Comments</span><span class="repo__desc">Text-mining research project classifying the sentiment of YouTube comments, with written report.</span><span class="repo__lang"><i style="--c:#DA5B0B"></i>Jupyter Notebook</span><span class="repo__when">May 2023</span><span class="repo__go">↗</span></a></li>
+        </ol>
       </div>
     </section>
 
@@ -357,7 +460,54 @@
       <div class="container contact__inner">
         <p class="kicker reveal">05 — Contact</p>
         <h2 class="contact__title split">Let's <em>talk.</em></h2>
-        <p class="contact__lead reveal">Open to quant, data science and consulting opportunities in London.</p>
+        <p class="contact__lead reveal">Open to quant, data science and consulting opportunities in London. Leave a note and it lands straight in my inbox.</p>
+
+        <!-- Contact form: sent by email via FormSubmit (endpoint set in data-endpoint) -->
+        <form class="cform reveal" id="contactForm" novalidate
+              data-endpoint="https://formsubmit.co/ajax/arunganesh1956@gmail.com">
+          <div class="cform__grid">
+            <div class="field">
+              <input id="cf-name" name="name" type="text" autocomplete="name" placeholder=" " required maxlength="80" />
+              <label for="cf-name">Your name</label>
+              <small class="field__err" aria-live="polite"></small>
+            </div>
+            <div class="field">
+              <input id="cf-email" name="email" type="email" autocomplete="email" placeholder=" " required maxlength="120" />
+              <label for="cf-email">Email</label>
+              <small class="field__err" aria-live="polite"></small>
+            </div>
+            <div class="field field--full">
+              <input id="cf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder=" " maxlength="24" />
+              <label for="cf-phone">Mobile number <i>(optional)</i></label>
+              <small class="field__err" aria-live="polite"></small>
+            </div>
+            <div class="field field--full">
+              <textarea data-lenis-prevent id="cf-msg" name="message" rows="5" placeholder=" " required maxlength="3000"></textarea>
+              <label for="cf-msg">Message</label>
+              <small class="field__err" aria-live="polite"></small>
+            </div>
+            <!-- spam trap: real people never see or fill this -->
+            <div class="cform__trap" aria-hidden="true">
+              <label for="cf-company">Company</label>
+              <input id="cf-company" name="_honey" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+          </div>
+          <div class="cform__foot">
+            <p class="cform__status" id="cfStatus" role="status" aria-live="polite"></p>
+            <button class="btn cform__send" type="submit" data-magnetic>
+              <span class="cform__label">Send message</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m0 0-6-6m6 6-6 6"/></svg>
+            </button>
+          </div>
+          <div class="cform__done" id="cfDone" hidden>
+            <span class="cform__tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17 19 7"/></svg></span>
+            <h3>Message sent.</h3>
+            <p>Thanks — I'll get back to you soon.</p>
+            <button type="button" class="link-arrow" id="cfAgain">Send another</button>
+          </div>
+        </form>
+
+        <p class="contact__or reveal">or email me directly</p>
         <a class="contact__email reveal" href="mailto:arunganesh1956@gmail.com" data-magnetic>
           <span>arunganesh1956@gmail.com</span>
         </a>
@@ -373,7 +523,7 @@
   <footer class="footer">
     <div class="footer__inner">
       <span>© <span id="year">2026</span> Vishal Sujatha Achimuthu</span>
-      <span>London · <span data-clock>--:--</span></span>
+      <span>London <span data-clock="Europe/London">--:--</span> · Chennai <span data-clock="Asia/Kolkata">--:--</span></span>
       <a href="#top">Back to top ↑</a>
     </div>
   </footer>

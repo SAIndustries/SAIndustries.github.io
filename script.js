@@ -16,8 +16,16 @@
 
   /* ---------- Small utilities ---------- */
   $('#year').textContent = new Date().getFullYear();
-  const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit' });
-  const tick = () => $$('[data-clock]').forEach(el => (el.textContent = fmt.format(new Date())));
+  // Live clocks: <b data-clock="Asia/Kolkata"> etc. (defaults to London)
+  const fmts = {};
+  const clockFmt = tz => (fmts[tz] ||= new Intl.DateTimeFormat('en-GB', { timeZone: tz, hour: '2-digit', minute: '2-digit' }));
+  const ukZone = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', timeZoneName: 'short' });
+  const tick = () => {
+    const now = new Date();
+    $$('[data-clock]').forEach(el => (el.textContent = clockFmt(el.dataset.clock || 'Europe/London').format(now)));
+    const z = (ukZone.formatToParts(now).find(p => p.type === 'timeZoneName') || {}).value || 'UK';
+    $$('[data-tzname]').forEach(el => (el.textContent = z.replace('GMT+1', 'BST')));
+  };
   tick(); setInterval(tick, 20000);
 
   $('#themeToggle').addEventListener('click', () => {
@@ -50,6 +58,127 @@
     const txt = el.textContent.trim().replace(/\s+/g, ' '); el.textContent = '';
     splitInto(el, txt, w => { const s = document.createElement('span'); s.className = 'w'; s.textContent = w; return s; });
   });
+
+
+  /* ---------- Contact form → email (FormSubmit) ---------- */
+  const form = $('#contactForm');
+  if (form) {
+    const status = $('#cfStatus'), done = $('#cfDone'), send = $('.cform__send', form), sendLabel = $('.cform__label', form);
+    const fields = {
+      name:    { el: $('#cf-name'),  check: v => v.trim().length >= 2 || 'Please enter your name.' },
+      email:   { el: $('#cf-email'), check: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) || 'Please enter a valid email address.' },
+      phone:   { el: $('#cf-phone'), check: v => !v.trim() || /^\+?[\d\s().-]{7,20}$/.test(v.trim()) || 'Use digits only, e.g. +44 7700 900123.' },
+      message: { el: $('#cf-msg'),   check: v => v.trim().length >= 10 || 'A few more words, please (10+ characters).' }
+    };
+    const validate = (key) => {
+      const f = fields[key], res = f.check(f.el.value), wrap = f.el.closest('.field');
+      const ok = res === true;
+      wrap.classList.toggle('is-bad', !ok);
+      f.el.setAttribute('aria-invalid', String(!ok));
+      $('.field__err', wrap).textContent = ok ? '' : res;
+      return ok;
+    };
+    Object.keys(fields).forEach(k => {
+      fields[k].el.addEventListener('blur', () => fields[k].el.value && validate(k));
+      fields[k].el.addEventListener('input', () => {
+        if (fields[k].el.closest('.field').classList.contains('is-bad')) validate(k);
+        if (!form.querySelector('.field.is-bad')) setStatus('');
+      });
+    });
+    const setStatus = (msg, kind = '') => { status.textContent = msg; status.className = 'cform__status' + (kind ? ' is-' + kind : ''); };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const bad = Object.keys(fields).filter(k => !validate(k));
+      if (bad.length) { fields[bad[0]].el.focus(); setStatus('Please fix the highlighted fields.', 'error'); return; }
+      // bots fill the hidden field — quietly pretend it worked
+      if ($('#cf-company').value) { form.classList.add('is-done'); done.hidden = false; return; }
+
+      const data = {
+        name: fields.name.el.value.trim(),
+        email: fields.email.el.value.trim(),
+        phone: fields.phone.el.value.trim() || '—',
+        message: fields.message.el.value.trim(),
+        _subject: `Portfolio message from ${fields.name.el.value.trim()}`,
+        _template: 'table',
+        _captcha: 'false'
+      };
+      send.disabled = true; form.classList.add('is-sending'); sendLabel.textContent = 'Sending…'; setStatus('');
+      try {
+        const res = await fetch(form.dataset.endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const json = await res.json().catch(() => ({}));
+        if (res.ok && String(json.success) === 'true') {
+          form.reset();
+          form.classList.add('is-done'); done.hidden = false;
+          if (window.gsap && !reduced) gsap.from(done.children, { y: 20, opacity: 0, stagger: 0.08, duration: 0.8, ease: 'expo.out' });
+        } else if (/activat/i.test(json.message || '')) {
+          setStatus('This form is waiting for one-time activation by the site owner — please email me directly below for now.', 'error');
+        } else {
+          throw new Error(json.message || 'Request failed');
+        }
+      } catch (err) {
+        setStatus('Couldn\'t send right now. Please email me directly at arunganesh1956@gmail.com.', 'error');
+      } finally {
+        send.disabled = false; form.classList.remove('is-sending'); sendLabel.textContent = 'Send message';
+      }
+    });
+    $('#cfAgain').addEventListener('click', () => { form.classList.remove('is-done'); done.hidden = true; setStatus(''); fields.name.el.focus(); });
+  }
+  if (reduced) $$('.route__plane').forEach(p => p.remove());
+  $$('.route').forEach(r => new IntersectionObserver(([en], ob) => { if (en.isIntersecting) { r.classList.add('is-in'); ob.disconnect(); } }, { threshold: 0.4 }).observe(r));
+
+
+  /* ---------- Projects: card count ---------- */
+  const projTotal = $('#projTotal');
+  if (projTotal) projTotal.textContent = String($$('.pcard').length).padStart(2, '0');
+
+  /* ---------- Repository index: live from GitHub ----------
+     New public repos appear automatically. Tweak names/descriptions below. */
+  const GH_USER = 'SAIndustries';
+  const HIDE = ['SAIndustries.github.io', 'V.I.V.E.G.A.M'];                     // repos not to list
+  const FEATURED = ['LOB-Market-Making', 'quant-signal-lab', 'SMI', 'Pomodoro-Timer'];
+  const OVERRIDES = {
+    'LOB-Market-Making': { name: 'LOB Market Making' },
+    'SMI': { name: 'SMIWatchEnv', desc: 'RL environment for silent myocardial infarction detection from wearable signals.' },
+    'Pomodoro-Timer': { name: 'Bloom — Pomodoro Timer', desc: 'Interactive Pomodoro timer with a flower that grows through each focus session.' },
+    'Stock-Market-Test': { name: 'Stock Market Prediction (LSTM)', desc: 'LSTM price prediction on yFinance data — my first market project, later rebuilt rigorously as quant-signal-lab.' },
+    'Mini-SRP-Project': { name: 'Sentiment Analysis on YouTube Comments', desc: 'Text-mining research project classifying the sentiment of YouTube comments, with written report.' }
+  };
+  const LANG = { Python: '#3572A5', 'Jupyter Notebook': '#DA5B0B', HTML: '#e34c26', CSS: '#563d7c', JavaScript: '#f1e05a', TypeScript: '#3178c6', 'C++': '#f34b7d', Java: '#b07219', R: '#198CE7', 'C#': '#178600' };
+  const reposList = $('#reposList'), reposStatus = $('#reposStatus');
+  const esc = t => String(t ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+  const monthYear = new Intl.DateTimeFormat('en-GB', { month: 'short', year: 'numeric' });
+  const renderRepos = (repos) => {
+    const list = repos.filter(r => !r.fork && !r.archived && !HIDE.includes(r.name))
+      .sort((a, b) => (FEATURED.includes(b.name) - FEATURED.includes(a.name)) || (new Date(b.pushed_at) - new Date(a.pushed_at)));
+    if (!list.length) return;
+    reposList.innerHTML = list.map(r => {
+      const o = OVERRIDES[r.name] || {};
+      const lang = r.language || '—';
+      return `<li class="repo"><a href="${esc(r.html_url)}" target="_blank" rel="noopener">
+        <span class="repo__name">${esc(o.name || r.name)}${FEATURED.includes(r.name) ? ' <em class="repo__feat">featured</em>' : ''}${r.stargazers_count > 2 ? ` <em class="repo__stars">★ ${r.stargazers_count}</em>` : ''}</span>
+        <span class="repo__desc">${esc(o.desc || r.description || 'No description yet.')}</span>
+        <span class="repo__lang"><i style="--c:${LANG[lang] || 'var(--faint)'}"></i>${esc(lang)}</span>
+        <span class="repo__when">${monthYear.format(new Date(r.pushed_at))}</span>
+        <span class="repo__go">↗</span></a></li>`;
+    }).join('');
+    reposStatus.textContent = `Live from GitHub · ${list.length} repositories`;
+    if (window.gsap && !reduced) gsap.from($$('.repo', reposList), { opacity: 0, y: 16, stagger: 0.05, duration: 0.7, ease: 'expo.out' });
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
+  };
+  if (reposList) {
+    let cached = null;
+    try { const c = JSON.parse(sessionStorage.getItem('gh-repos') || 'null'); if (c && Date.now() - c.t < 30 * 60e3) cached = c.d; } catch (e) {}
+    if (cached) renderRepos(cached);
+    else fetch(`https://api.github.com/users/${GH_USER}/repos?per_page=100&sort=pushed`, { headers: { Accept: 'application/vnd.github+json' } })
+      .then(r => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then(d => { try { sessionStorage.setItem('gh-repos', JSON.stringify({ t: Date.now(), d })); } catch (e) {} renderRepos(d); })
+      .catch(() => { /* keep the static list already in the HTML */ });
+  }
 
   /* ---------- Smooth scroll (Lenis) ---------- */
   let lenis = null;

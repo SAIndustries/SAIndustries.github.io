@@ -1,80 +1,55 @@
 # Vishal Sujatha Achimuthu — Portfolio
 
-<p align="center">
-  <strong>Data Science • Artificial Intelligence • Machine Learning • Quantitative Finance</strong>
-</p>
+Static personal site (HTML + CSS + JS, no build step) for GitHub Pages.
 
-<p align="center">
-  <a href="https://saindustries.github.io">🌐 View Portfolio</a>
-</p>
-
-## About
-
-Welcome to my personal portfolio.
-
-I am an **MSc Data Science student at King's College London** with industry experience and a strong interest in building practical, data-driven solutions. This portfolio brings together my academic work, technical projects, professional experience, and interests across **Data Science, AI, Machine Learning, and Quantitative Finance**.
-
-The site is designed to provide a concise overview of my work, skills, background, and the projects I am currently exploring.
-
-## What You'll Find
-
-- **About Me** — My background, interests, and current academic journey
-- **Skills** — Technical tools, technologies, and areas of expertise
-- **Experience** — Professional and project experience
-- **Projects** — Selected academic, personal, and technical projects
-- **CV** — My latest resume
-- **Contact & Links** — Ways to connect with me and explore my work
-
-## Tech Stack
-
-This portfolio is intentionally lightweight and built using:
-
-- **HTML5** — Structure and content
-- **CSS3** — Responsive design, layouts, animations, and themes
-- **JavaScript** — Interactivity, navigation, theme switching, and scroll effects
-- **GitHub Pages** — Hosting and deployment
-
-No frameworks or build tools are required.
-
-## Design & Features
-
-The portfolio includes:
-
-- Responsive design for desktop and mobile
-- Dark and light themes
-- Mobile-friendly navigation
-- Scroll-based animations
-- Project showcase
-- Downloadable CV
-- Social and professional links
-- GitHub Pages deployment
-
-## Repository Structure
-
-```text
-.
-├── index.html      # Main portfolio page
-├── styles.css      # Styling and responsive design
-├── script.js       # Interactive functionality
-├── assets/         # Images, CV, favicon, and other assets
-└── .nojekyll       # GitHub Pages configuration
+```
+index.html      page content — edit text here
+styles.css      design; change colours in the :root tokens at the top
+script.js       all motion: intro, smooth scroll, cursor, draggable shapes,
+                pinned sections, horizontal projects, skills orbit, marquee
+assets/         photos, CV PDF, favicon, social-share image
+assets/js/      GSAP 3.12, ScrollTrigger, Lenis (bundled locally — no CDN needed)
+.nojekyll       tells GitHub Pages to serve files as-is
 ```
 
-## Live Website
+## Publish on GitHub Pages
 
-🌐 **[saindustries.github.io](https://saindustries.github.io)**
+1. On GitHub, create a **public** repo named exactly `SAIndustries.github.io`.
+2. Upload everything in this folder (keep the `assets/` folder) to the repo root and commit.
+3. Repo → **Settings → Pages** → Source: *Deploy from a branch* → Branch: `main` / `(root)` → Save.
+4. After ~1 minute the site is live at **https://saindustries.github.io**.
 
-The portfolio is hosted using **GitHub Pages**.
+Then add that URL to your LinkedIn "Website" field and the header of your CV.
 
-## Connect With Me
+## Common edits
 
-If you'd like to discuss Data Science, AI/ML, Quantitative Finance, projects, research, or potential opportunities, feel free to connect.
+- **Swap the CV:** replace `assets/Vishal_Sujatha_Achimuthu_CV.pdf` with a new file of the same name.
+- **Add a featured project card:** copy one `<article class="pcard">…</article>` block in the Projects
+  carousel (the "01 / 07" counter updates itself). Add the repo name to `FEATURED` in `script.js`.
+- **Repository index:** lists your public GitHub repos live on every visit — new repos appear
+  automatically. Edit `OVERRIDES` (nicer names/descriptions) or `HIDE` (repos to skip) in `script.js`.
+  If GitHub is unreachable, the static list in `index.html` (#reposList) is shown instead.
+- **Change accent colour:** edit `--accent` in `styles.css` (dark and light themes each have one).
+- **Preview locally:** `python3 -m http.server` in this folder, then open http://localhost:8000.
 
-- **GitHub:** [SAIndustries](https://github.com/SAIndustries)
-- **Portfolio:** [saindustries.github.io](https://saindustries.github.io)
+## Motion notes
 
----
+- Visitors with "reduce motion" switched on (or if the scripts fail to load) get a calm, fully readable static version.
+- The intro curtain plays once per browser session.
+- To change the orbit skills, edit the `skills` array in `script.js`.
+- To change the giant manifesto words, edit `.manifesto__track` in `index.html`.
 
-<p align="center">
-  <i>Building with data, learning continuously, and turning ideas into practical solutions.</i>
-</p>
+## Contact form (one-time setup)
+
+The form emails you through [FormSubmit](https://formsubmit.co) — free, no account or API key.
+
+1. After the site is live, send yourself a test message from the form.
+2. FormSubmit emails **arunganesh1956@gmail.com** an activation link — click it (check spam).
+3. Done. Every future message arrives as an email titled "Portfolio message from <name>"
+   with their name, email, mobile and message; hitting Reply answers the sender.
+
+Optional: the activation email also gives you a random alias. Replace your address in
+`data-endpoint="https://formsubmit.co/ajax/…"` in `index.html` with that alias to keep
+your email out of the page source.
+
+To change the recipient, edit that same `data-endpoint` attribute.

@@ -1,55 +1,75 @@
-# Vishal Sujatha Achimuthu — Portfolio
+# saindustries.github.io
 
-Static personal site (HTML + CSS + JS, no build step) for GitHub Pages.
+My personal site: who I am, what I've worked on, and how to reach me.
+
+**Live:** [saindustries.github.io](https://saindustries.github.io)
+
+![Portfolio hero](assets/preview.jpg)
+
+## About
+
+I'm Vishal, an MSc Data Science student at King's College London. Before this I spent a year and a half as a software engineer at LTM (formerly LTI Mindtree), building AI features for hospitality, logistics and airline clients. These days most of my time goes into quantitative research: market microstructure, backtesting, and checking whether a signal still holds up out of sample.
+
+I wanted one place that shows that work properly, instead of a CV squeezing it into bullet points. So I built this from scratch, with no templates and no site builders.
+
+## What's on it
+
+- **Projects.** The work I'm proudest of, led by [LOB Market Making](https://github.com/SAIndustries/LOB-Market-Making) and [Quant-Signal-Lab](https://github.com/SAIndustries/quant-signal-lab).
+- **Repository index.** Pulled live from the GitHub API, so anything new I push shows up without me touching the site.
+- **Experience and education.** LTM, Ripen Labs, King's and Panimalar.
+- **Contact form.** Messages come straight to my inbox.
+- **Chennai to London.** Where I'm from and where I am now, with both local times.
+
+## How it's built
+
+Plain HTML, CSS and JavaScript. There's no framework and no build step; GitHub Pages serves the files as they are.
+
+The motion is where most of the effort went:
+
+- **Smooth scrolling** with [Lenis](https://github.com/darkroomengineering/lenis), and scroll-driven animation with [GSAP](https://gsap.com) and ScrollTrigger.
+- **The shapes on the landing screen** run on a small physics loop I wrote: spring forces, collisions, and a repulsion zone so they never cover my face, whatever the screen size.
+- **A pinned horizontal scroll** for projects, a draggable skills orbit, and a marquee that reacts to how fast you scroll.
+- **A custom cursor, magnetic buttons, and text that reveals word by word.**
+
+It also had to stay usable, not just look good:
+
+- **Reduced motion.** If your system asks for it, every animation switches off and the page reads as a normal static site.
+- **Phones.** The layout is designed for small screens on its own terms, not as a shrunken desktop.
+- **Accessibility.** The page uses semantic HTML, works with the keyboard, and keeps text readable in both themes.
+- **Light and dark themes**, with the same warm amber accent in both.
+
+Libraries are bundled locally in `assets/js`, so the site doesn't depend on a CDN being up.
+
+## Running it locally
+
+```bash
+git clone https://github.com/SAIndustries/SAIndustries.github.io.git
+cd SAIndustries.github.io
+python3 -m http.server
+```
+
+Then open http://localhost:8000.
+
+## Structure
 
 ```
-index.html      page content — edit text here
-styles.css      design; change colours in the :root tokens at the top
-script.js       all motion: intro, smooth scroll, cursor, draggable shapes,
-                pinned sections, horizontal projects, skills orbit, marquee
-assets/         photos, CV PDF, favicon, social-share image
-assets/js/      GSAP 3.12, ScrollTrigger, Lenis (bundled locally — no CDN needed)
-.nojekyll       tells GitHub Pages to serve files as-is
+index.html     content
+styles.css     design tokens, layout, responsive rules
+script.js      animation, physics, GitHub sync, contact form
+assets/        photos, CV, favicon, vendored JS libraries
 ```
 
-## Publish on GitHub Pages
+## Credits
 
-1. On GitHub, create a **public** repo named exactly `SAIndustries.github.io`.
-2. Upload everything in this folder (keep the `assets/` folder) to the repo root and commit.
-3. Repo → **Settings → Pages** → Source: *Deploy from a branch* → Branch: `main` / `(root)` → Save.
-4. After ~1 minute the site is live at **https://saindustries.github.io**.
+- **Animation:** [GSAP](https://gsap.com) and [Lenis](https://github.com/darkroomengineering/lenis).
+- **Contact form delivery:** [FormSubmit](https://formsubmit.co).
+- **Type:** Space Grotesk, Inter, Instrument Serif and JetBrains Mono, all via Google Fonts.
+- **Design inspiration:** motion-led studio sites like [gravity-design.de](https://gravity-design.de).
 
-Then add that URL to your LinkedIn "Website" field and the header of your CV.
+## Contact
 
-## Common edits
+If you'd like to talk about quant, data science or anything else on here, the form on the site is the quickest route. You can also reach me on [LinkedIn](https://www.linkedin.com/in/saindustries/).
 
-- **Swap the CV:** replace `assets/Vishal_Sujatha_Achimuthu_CV.pdf` with a new file of the same name.
-- **Add a featured project card:** copy one `<article class="pcard">…</article>` block in the Projects
-  carousel (the "01 / 07" counter updates itself). Add the repo name to `FEATURED` in `script.js`.
-- **Repository index:** lists your public GitHub repos live on every visit — new repos appear
-  automatically. Edit `OVERRIDES` (nicer names/descriptions) or `HIDE` (repos to skip) in `script.js`.
-  If GitHub is unreachable, the static list in `index.html` (#reposList) is shown instead.
-- **Change accent colour:** edit `--accent` in `styles.css` (dark and light themes each have one).
-- **Preview locally:** `python3 -m http.server` in this folder, then open http://localhost:8000.
+---
 
-## Motion notes
-
-- Visitors with "reduce motion" switched on (or if the scripts fail to load) get a calm, fully readable static version.
-- The intro curtain plays once per browser session.
-- To change the orbit skills, edit the `skills` array in `script.js`.
-- To change the giant manifesto words, edit `.manifesto__track` in `index.html`.
-
-## Contact form (one-time setup)
-
-The form emails you through [FormSubmit](https://formsubmit.co) — free, no account or API key.
-
-1. After the site is live, send yourself a test message from the form.
-2. FormSubmit emails **arunganesh1956@gmail.com** an activation link — click it (check spam).
-3. Done. Every future message arrives as an email titled "Portfolio message from <name>"
-   with their name, email, mobile and message; hitting Reply answers the sender.
-
-Optional: the activation email also gives you a random alias. Replace your address in
-`data-endpoint="https://formsubmit.co/ajax/…"` in `index.html` with that alias to keep
-your email out of the page source.
-
-To change the recipient, edit that same `data-endpoint` attribute.
+© 2026 Vishal Sujatha Achimuthu. The code is free to learn from. Please don't reuse the content or photos as your own.

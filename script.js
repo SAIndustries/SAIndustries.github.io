@@ -1,9 +1,3 @@
-/* =========================================================
-   Portfolio interactions
-   GSAP + ScrollTrigger + Lenis (vendored in assets/js).
-   Everything degrades gracefully: without JS / libraries or with
-   "reduce motion" on, the page is a normal static, readable site.
-   ========================================================= */
 (() => {
   const root = document.documentElement;
   const $ = (s, c = document) => c.querySelector(s);
@@ -140,8 +134,9 @@
      New public repos appear automatically. Tweak names/descriptions below. */
   const GH_USER = 'SAIndustries';
   const HIDE = ['SAIndustries.github.io', 'V.I.V.E.G.A.M'];                     // repos not to list
-  const FEATURED = ['LOB-Market-Making', 'quant-signal-lab', 'SMI', 'Pomodoro-Timer'];
+  const FEATURED = ['dq-lab', 'LOB-Market-Making', 'quant-signal-lab', 'SMI', 'Pomodoro-Timer'];
   const OVERRIDES = {
+    'dq-lab': { name: 'DQ-Lab' },
     'LOB-Market-Making': { name: 'LOB Market Making' },
     'SMI': { name: 'SMIWatchEnv', desc: 'RL environment for silent myocardial infarction detection from wearable signals.' },
     'Pomodoro-Timer': { name: 'Bloom — Pomodoro Timer', desc: 'Interactive Pomodoro timer with a flower that grows through each focus session.' },

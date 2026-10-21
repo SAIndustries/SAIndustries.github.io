@@ -1,7 +1,3 @@
-/* =========================================================
-   Vishal Sujatha Achimuthu — Portfolio (v2, motion edition)
-   Colours live in the tokens below; change --accent to re-theme.
-   ========================================================= */
 :root {
   --bg: #0b0b0d;
   --bg-2: #121215;
@@ -555,3 +551,19 @@ h3 { font-family: var(--display); font-size: 22px; letter-spacing: -0.02em; font
   .repo__go { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .book i, .ecg, .bloom__head { animation: none !important; stroke-dashoffset: 0 !important; } }
+
+/* ---------- DQ-Lab visual ---------- */
+.viz--dq .dq__ref { fill: none; stroke: currentColor; stroke-width: 2.5; vector-effect: non-scaling-stroke; stroke-dasharray: 1200; stroke-dashoffset: 1200; transition: stroke-dashoffset 2s var(--ease); }
+.viz--dq .dq__vendor { fill: none; stroke: var(--muted); stroke-width: 2; stroke-dasharray: 6 5; vector-effect: non-scaling-stroke; opacity: 0; transition: opacity 1s .8s; }
+.viz--dq .dq__gap { stroke: #e5484d; stroke-width: 2; stroke-dasharray: 3 4; vector-effect: non-scaling-stroke; opacity: 0; transition: opacity .6s 1.6s; }
+.viz--dq .dq__flag { fill: #e5484d; stroke: var(--bg); stroke-width: 2; vector-effect: non-scaling-stroke; opacity: 0; transition: opacity .5s 1.4s; animation: flag 2.4s ease-in-out infinite; }
+.pcard.in .dq__ref, .no-js .dq__ref { stroke-dashoffset: 0; }
+.pcard.in .dq__vendor, .pcard.in .dq__gap, .pcard.in .dq__flag, .no-js .dq__vendor, .no-js .dq__gap, .no-js .dq__flag { opacity: 1; }
+@keyframes flag { 50% { r: 7; } }
+.dq__legend { position: absolute; left: 20px; top: 14px; display: flex; gap: 14px; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.dq__legend i { display: inline-block; width: 14px; height: 3px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+.dq__legend i.ref { background: var(--accent); } .dq__legend i.ven { background: var(--muted); } .dq__legend i.flg { width: 8px; height: 8px; border-radius: 50%; background: #e5484d; }
+.pcard__links { display: inline-flex; gap: 14px; }
+.reduced .dq__ref, .reduced .dq__vendor, .reduced .dq__gap, .reduced .dq__flag { stroke-dashoffset: 0; opacity: 1; animation: none; }
+.pcard__top { flex-wrap: wrap; row-gap: 8px; }
+.card__link { white-space: nowrap; }

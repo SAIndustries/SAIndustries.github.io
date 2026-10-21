@@ -247,13 +247,40 @@
             <h2 class="split">Things I've <em>built.</em></h2>
           </div>
           <div class="projects__meta">
-            <span class="projects__counter"><b id="projNow">01</b> / <span id="projTotal">06</span></span>
+            <span class="projects__counter"><b id="projNow">01</b> / <span id="projTotal">07</span></span>
             <a class="link-arrow" href="https://github.com/SAIndustries" target="_blank" rel="noopener">All repositories →</a>
           </div>
         </header>
 
         <div class="projects__track" id="projTrack">
           <!-- 01 -->
+          <article class="pcard pcard--feature" data-cursor="view">
+            <div class="pcard__visual" aria-hidden="true">
+              <svg viewBox="0 0 400 200" class="viz viz--dq" preserveAspectRatio="none">
+                <g class="viz__grid"><path d="M0 50H400M0 100H400M0 150H400"/></g>
+                <path class="dq__ref" d="M0 170 L40 158 L80 150 L120 136 L160 128 L200 112 L240 100 L280 84 L320 70 L360 56 L400 40"/>
+                <path class="dq__vendor" d="M0 172 L40 160 L80 151 L120 138 L160 129 L200 114 L240 102 L250 104 L280 96 L320 88 L360 80 L400 72"/>
+                <line class="dq__gap" x1="400" y1="40" x2="400" y2="72"/>
+                <circle class="dq__flag" cx="250" cy="104" r="5"/><circle class="dq__flag" cx="320" cy="88" r="5"/><circle class="dq__flag" cx="400" cy="72" r="5"/>
+              </svg>
+              <div class="dq__legend"><span><i class="ref"></i>reference</span><span><i class="ven"></i>vendor</span><span><i class="flg"></i>flagged</span></div>
+              <span class="pcard__num">01</span>
+            </div>
+            <div class="pcard__body">
+              <div class="pcard__top">
+                <span class="badge">Featured · Oct 2026</span>
+                <span class="pcard__links">
+                  <a class="card__link" href="https://chimerical-malabi-e8dd89.netlify.app" target="_blank" rel="noopener">Read report ↗</a>
+                  <a class="card__link" href="https://github.com/SAIndustries/dq-lab" target="_blank" rel="noopener">View repo ↗</a>
+                </span>
+              </div>
+              <h3>DQ-Lab</h3>
+              <p>How much can you trust market data? I pulled 20 US stocks (2015–2026), three crypto exchanges and every SEC 8-K filing from 7 sources, normalised them with Polars, and ran a 14-check validation suite. It caught a vendor silently dropping up to 92% of dividend adjustments, SEC timestamps 4–5 hours off for 13 of 20 companies, and showed that sloppy timing can turn a 1.3 bp signal into a fake 82 bp one.</p>
+              <div class="tags"><span>Python</span><span>Polars</span><span>SEC EDGAR</span><span>Data validation</span><span>pytest</span></div>
+            </div>
+          </article>
+
+          <!-- 02 -->
           <article class="pcard pcard--feature" data-cursor="view">
             <div class="pcard__visual" aria-hidden="true">
               <div class="viz viz--book">
@@ -264,11 +291,11 @@
                 </div>
                 <div class="book__stat"><b>−1.2 bp</b><span>adverse selection</span></div>
               </div>
-              <span class="pcard__num">01</span>
+              <span class="pcard__num">02</span>
             </div>
             <div class="pcard__body">
               <div class="pcard__top">
-                <span class="badge">Featured · Oct 2026</span>
+                <span class="badge">Oct 2026 · Market microstructure</span>
                 <a class="card__link" href="https://github.com/SAIndustries/LOB-Market-Making" target="_blank" rel="noopener">View repo ↗</a>
               </div>
               <h3>LOB Market Making</h3>
@@ -277,7 +304,7 @@
             </div>
           </article>
 
-          <!-- 02 -->
+          <!-- 03 -->
           <article class="pcard pcard--feature" data-cursor="view">
             <div class="pcard__visual" aria-hidden="true">
               <svg viewBox="0 0 400 200" class="viz viz--equity" preserveAspectRatio="none">
@@ -287,7 +314,7 @@
                 <path class="viz__line" d="M0 160 L20 150 L40 155 L60 138 L80 142 L100 120 L120 126 L140 110 L160 116 L180 96 L200 104 L220 84 L240 90 L260 72 L280 80 L300 60 L320 66 L340 48 L360 54 L380 36 L400 30"/>
                 <path class="viz__null" d="M0 160 L40 162 L80 158 L120 164 L160 159 L200 163 L240 160 L280 165 L320 161 L360 163 L400 160"/>
               </svg>
-              <span class="pcard__num">02</span>
+              <span class="pcard__num">03</span>
             </div>
             <div class="pcard__body">
               <div class="pcard__top">
@@ -299,14 +326,14 @@
               <div class="tags"><span>Python</span><span>scikit-learn</span><span>Backtesting</span><span>Statistics</span><span>pytest</span></div>
             </div>
           </article>
-          <!-- 03 -->
+          <!-- 04 -->
           <article class="pcard" data-cursor="view">
             <div class="pcard__visual" aria-hidden="true">
               <svg viewBox="0 0 400 200" class="viz viz--ecg" preserveAspectRatio="none">
                 <g class="viz__grid"><path d="M0 50H400M0 100H400M0 150H400"/></g>
                 <path class="ecg" d="M0 110 H70 l10 -6 l10 6 h20 l8 22 l12 -92 l12 96 l10 -26 h26 l14 -14 l14 14 H260 l10 -6 l10 6 h20 l8 22 l12 -92 l12 96 l10 -26 h26 l14 -14 l14 14 H400"/>
               </svg>
-              <span class="pcard__num">03</span>
+              <span class="pcard__num">04</span>
             </div>
             <div class="pcard__body">
               <div class="pcard__top">
@@ -319,7 +346,7 @@
             </div>
           </article>
 
-          <!-- 04 -->
+          <!-- 05 -->
           <article class="pcard" data-cursor="view">
             <div class="pcard__visual" aria-hidden="true">
               <div class="viz viz--morse">
@@ -328,7 +355,7 @@
                 <i class="d"></i><i class="d"></i><i class="d"></i><b></b>
                 <i class="l"></i><i class="l"></i><i class="l"></i>
               </div>
-              <span class="pcard__num">04</span>
+              <span class="pcard__num">05</span>
             </div>
             <div class="pcard__body">
               <div class="pcard__top"><span class="badge">Jan 2024 · Deep Learning</span></div>
@@ -337,7 +364,7 @@
               <div class="tags"><span>LipNet</span><span>TensorFlow</span><span>Accessibility</span></div>
             </div>
           </article>
-          <!-- 05 -->
+          <!-- 06 -->
           <article class="pcard" data-cursor="view">
             <div class="pcard__visual" aria-hidden="true">
               <svg viewBox="0 0 200 120" class="viz viz--bloom">
@@ -350,7 +377,7 @@
                   <circle class="bloom__core" cx="100" cy="52" r="7"/>
                 </g>
               </svg>
-              <span class="pcard__num">05</span>
+              <span class="pcard__num">06</span>
             </div>
             <div class="pcard__body">
               <div class="pcard__top">
@@ -363,11 +390,11 @@
             </div>
           </article>
 
-          <!-- 06 -->
+          <!-- 07 -->
           <article class="pcard" data-cursor="view">
             <div class="pcard__visual" aria-hidden="true">
               <div class="viz viz--cube"><div class="cube"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
-              <span class="pcard__num">06</span>
+              <span class="pcard__num">07</span>
             </div>
             <div class="pcard__body">
               <div class="pcard__top"><span class="badge">Feb 2023 · AR / VR</span></div>
@@ -392,6 +419,7 @@
           <p class="repos__live reveal"><span class="dot"></span> <span id="reposStatus">Synced from github.com/SAIndustries</span></p>
         </header>
         <ol class="repos__list" id="reposList">
+          <li class="repo reveal"><a href="https://github.com/SAIndustries/dq-lab" target="_blank" rel="noopener"><span class="repo__name">DQ-Lab <em class="repo__feat">featured</em></span><span class="repo__desc">Multi-vendor market data quality lab: 7 sources, a tested validation suite, and the impact of data errors on research results.</span><span class="repo__lang"><i style="--c:#3572A5"></i>Python</span><span class="repo__when">Oct 2026</span><span class="repo__go">↗</span></a></li>
           <li class="repo reveal"><a href="https://github.com/SAIndustries/LOB-Market-Making" target="_blank" rel="noopener"><span class="repo__name">LOB Market Making <em class="repo__feat">featured</em></span><span class="repo__desc">Event-driven market-making backtester on real Binance order book data, modelling latency and queue position.</span><span class="repo__lang"><i style="--c:#DA5B0B"></i>Jupyter Notebook</span><span class="repo__when">Oct 2026</span><span class="repo__go">↗</span></a></li>
           <li class="repo reveal"><a href="https://github.com/SAIndustries/quant-signal-lab" target="_blank" rel="noopener"><span class="repo__name">quant-signal-lab <em class="repo__feat">featured</em></span><span class="repo__desc">Leakage-safe walk-forward evaluation and cost-aware backtesting of return-prediction models on 10 ETFs.</span><span class="repo__lang"><i style="--c:#3572A5"></i>Python</span><span class="repo__when">Oct 2026</span><span class="repo__go">↗</span></a></li>
           <li class="repo reveal"><a href="https://github.com/SAIndustries/Pomodoro-Timer" target="_blank" rel="noopener"><span class="repo__name">Bloom — Pomodoro Timer <em class="repo__feat">featured</em></span><span class="repo__desc">Interactive Pomodoro timer with a flower that grows through each focus session.</span><span class="repo__lang"><i style="--c:#e34c26"></i>HTML</span><span class="repo__when">Jul 2026</span><span class="repo__go">↗</span></a></li>
